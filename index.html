@@ -121,6 +121,15 @@
             accent-color: var(--accent-blue);
             cursor: pointer;
         }
+
+        /* ================= DNS RECORD OUTPUT ================= */
+        .dns-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .dns-table th { text-align: left; padding: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); border-bottom: 1px solid var(--panel-border); }
+        .dns-table td { padding: 10px 8px; border-bottom: 1px solid var(--panel-border); }
+        .dns-table tr:last-child td { border-bottom: none; }
+        .dns-chip { display: inline-block; background: rgba(59,130,246,0.15); color: var(--accent-blue); border-radius: 3px; padding: 2px 7px; font-weight: 700; font-size: 11px; letter-spacing: 0.5px; }
+        .dns-mono { font-family: monospace; font-size: 13px; color: #fff; }
+        .dns-pre { background: #111; border: 1px solid var(--panel-border); border-radius: 6px; padding: 14px; font-family: monospace; font-size: 12px; color: #b9f6ca; white-space: pre; overflow-x: auto; margin-top: 12px; }
     </style>
 </head>
 <body>
@@ -228,46 +237,38 @@
             <button class="btn btn-blue" onclick="saveSettings()">Save</button>
         </div>
 
-        <!-- ============ NEW: Cloudflare DNS Panel ============ -->
+        <!-- ============ NEW: Domain & DNS Record Generator ============ -->
         <div class="panel">
-            <div class="panel-header">🌐 Domain & Cloudflare DNS</div>
-            
+            <div class="panel-header">🌐 Domain &amp; DNS Records</div>
+
             <div class="form-grid">
                 <div class="input-group">
                     <label>Domain (Hosted Online)</label>
-                    <input type="text" id="cf-domain" placeholder="offer3godaddee.click">
+                    <input type="text" id="dns-domain" placeholder="offer3godaddee.click">
                 </div>
                 <div class="input-group">
-                    <label>Cloudflare API Token</label>
-                    <input type="password" id="cf-api-token" placeholder="Your Cloudflare API Token">
-                </div>
-                <div class="input-group">
-                    <label>Cloudflare Zone ID</label>
-                    <input type="text" id="cf-zone-id" placeholder="Your Zone ID">
-                </div>
-                <div class="input-group">
-                    <label>Hosting Target (IP for A record / Hostname for CNAME)</label>
-                    <input type="text" id="cf-target" placeholder="e.g. 76.76.21.21 or cname.vercel-dns.com">
-                </div>
-            </div>
-
-            <div class="form-grid">
-                <div class="input-group" style="grid-column: span 2;">
-                    <label>Backend Proxy URL (Serverless Function — required for CORS/security)</label>
-                    <input type="text" id="cf-proxy-url" placeholder="https://your-worker.workers.dev/add-dns">
+                    <label>Record Type</label>
+                    <select id="dns-record-type">
+                        <option value="A">A — points to an IPv4 address</option>
+                        <option value="CNAME">CNAME — points to a hostname</option>
+                    </select>
                 </div>
             </div>
 
             <div class="btn-group" style="justify-content: flex-start; gap: 10px; margin-top: 5px;">
-                <button class="btn btn-blue" onclick="saveCloudflareSettings()">Save Credentials</button>
-                <button class="btn btn-green" onclick="pushDnsToCloudflare()">Push DNS to Cloudflare</button>
-                <button class="btn btn-gray" onclick="showDnsRecords()">View Required DNS Records</button>
+                <button class="btn btn-green" onclick="generateDnsRecords()">Generate DNS Records</button>
+                <button class="btn btn-gray" onclick="copyAllDnsRecords()">Copy All Records</button>
+                <button class="btn btn-blue" onclick="downloadDnsRecords()">Download .txt</button>
             </div>
 
-            <div id="cf-status" style="margin-top: 15px; font-size: 13px; color: var(--text-muted); min-height: 18px;"></div>
+            <div id="dns-output" style="margin-top: 20px;"></div>
 
-            <div style="margin-top: 15px; font-size: 12px; color: var(--text-muted); background: rgba(0,0,0,0.2); padding: 12px; border-radius: 4px; line-height: 1.6;">
-                <strong>⚠️ Security Note:</strong> A browser page alone cannot call the Cloudflare API (CORS + token exposure). Deploy the Cloudflare Worker code shown in the chat to your Cloudflare account, then paste its URL above.
+            <div style="margin-top: 15px; font-size: 12px; color: var(--text-muted); background: rgba(0,0,0,0.2); padding: 12px; border-radius: 4px; line-height: 1.7;">
+                <strong>How to use:</strong><br>
+                1. Enter your domain and pick the record type, then click <em>Generate DNS Records</em>.<br>
+                2. Replace the placeholder target with your real hosting IP / hostname.<br>
+                3. Open <strong>Cloudflare → your domain → DNS → Records → Add record</strong> and enter each row exactly as shown.<br>
+                4. Leave <strong>Proxy status</strong> on <em>Proxied</em> (orange cloud) unless your host tells you otherwise.
             </div>
         </div>
 
@@ -560,12 +561,9 @@
                 'googlemeet', 'zoom', 'sharepoint', 'word'
             ],
             downloadLink: 'https://www.google.com/',
-            cloudflare: {
+            dns: {
                 domain: '',
-                token: '',
-                zoneId: '',
-                target: '',
-                proxyUrl: ''
+                recordType: 'A'
             }
         };
 
@@ -573,8 +571,8 @@
         if (localStorage.getItem('hubState')) {
             const saved = JSON.parse(localStorage.getItem('hubState'));
             Object.assign(state, saved);
-            if (!state.cloudflare) {
-                state.cloudflare = { domain: '', token: '', zoneId: '', target: '', proxyUrl: '' };
+            if (!state.dns) {
+                state.dns = { domain: '', recordType: 'A' };
             }
         }
 
@@ -665,13 +663,10 @@
             document.getElementById('domain-input').value = state.domain;
             document.getElementById('download-link-input').value = state.downloadLink;
 
-            // Cloudflare panel fields
-            const cf = state.cloudflare || {};
-            document.getElementById('cf-domain').value = cf.domain || state.domain || '';
-            document.getElementById('cf-api-token').value = cf.token || '';
-            document.getElementById('cf-zone-id').value = cf.zoneId || '';
-            document.getElementById('cf-target').value = cf.target || '';
-            document.getElementById('cf-proxy-url').value = cf.proxyUrl || '';
+            // DNS panel fields
+            const dns = state.dns || {};
+            document.getElementById('dns-domain').value = dns.domain || state.domain || '';
+            document.getElementById('dns-record-type').value = dns.recordType || 'A';
 
             renderLinksPanel();
 
@@ -707,88 +702,160 @@
             alert(`Settings Saved!\nDomain: https://${domain}\nDownload Link: ${downloadLink}`);
         }
 
-        // ============ Cloudflare DNS Functions ============
+        // ============ DNS RECORD GENERATOR ============
 
-        function saveCloudflareSettings() {
-            const cfDomain = document.getElementById('cf-domain').value.trim();
-            const cfToken = document.getElementById('cf-api-token').value.trim();
-            const cfZoneId = document.getElementById('cf-zone-id').value.trim();
-            const cfTarget = document.getElementById('cf-target').value.trim();
-            const cfProxy = document.getElementById('cf-proxy-url').value.trim();
+        let lastDnsData = null;
 
-            if (!cfDomain || !cfToken || !cfZoneId || !cfTarget || !cfProxy) {
-                return updateCfStatus('❌ Please fill in all fields before saving.', 'var(--accent-red)');
+        function clipboardCopy(text, btn) {
+            const done = () => {
+                if (!btn) return;
+                const old = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => { btn.textContent = old; }, 1200);
+            };
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(done).catch(() => legacyCopy(text, done));
+            } else {
+                legacyCopy(text, done);
+            }
+        }
+
+        function legacyCopy(text, cb) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.top = '-1000px';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); } catch (e) {}
+            document.body.removeChild(ta);
+            if (cb) cb();
+        }
+
+        function cleanDomain(raw) {
+            return raw.trim()
+                      .replace(/^https?:\/\//i, '')
+                      .replace(/^www\./i, '')
+                      .replace(/\/.*$/, '')
+                      .replace(/\s+/g, '');
+        }
+
+        function buildDnsRecords() {
+            const rawDomain = document.getElementById('dns-domain').value;
+            const recordType = document.getElementById('dns-record-type').value;
+
+            const domain = cleanDomain(rawDomain);
+            if (!domain || !domain.includes('.')) {
+                alert('Please enter a valid domain (e.g. example.com).');
+                return null;
             }
 
-            state.cloudflare = { domain: cfDomain, token: cfToken, zoneId: cfZoneId, target: cfTarget, proxyUrl: cfProxy };
-            state.domain = cfDomain; // Sync with system settings
+            const placeholder = recordType === 'A' ? 'YOUR_SERVER_IP' : 'your-app.vercel.app';
+
+            return {
+                domain: domain,
+                recordType: recordType,
+                placeholder: placeholder,
+                records: [
+                    { type: recordType, name: '@',   content: placeholder, proxy: 'Proxied (orange cloud)', ttl: 'Auto' },
+                    { type: recordType, name: 'www', content: placeholder, proxy: 'Proxied (orange cloud)', ttl: 'Auto' }
+                ]
+            };
+        }
+
+        function generateDnsRecords() {
+            const data = buildDnsRecords();
+            if (!data) return;
+
+            lastDnsData = data;
+
+            state.dns = { domain: data.domain, recordType: data.recordType };
+            state.domain = data.domain;
             localStorage.setItem('hubState', JSON.stringify(state));
+            document.getElementById('domain-input').value = data.domain;
 
-            updateCfStatus('✅ Cloudflare credentials saved locally.', 'var(--accent-green)');
-            // Reflect in system settings
-            document.getElementById('domain-input').value = cfDomain;
+            const rows = data.records.map((r, i) => `
+                <tr>
+                    <td><span class="dns-chip">${r.type}</span></td>
+                    <td class="dns-mono">${r.name}</td>
+                    <td class="dns-mono">${r.content}</td>
+                    <td style="color: var(--text-muted); font-size: 12px;">${r.proxy}</td>
+                    <td style="color: var(--text-muted); font-size: 12px;">${r.ttl}</td>
+                    <td style="text-align: right;">
+                        <button class="btn btn-gray" onclick="copyDnsRow(${i}, this)">Copy</button>
+                    </td>
+                </tr>
+            `).join('');
+
+            const rawText = data.records.map(r =>
+                `Type: ${r.type} | Name: ${r.name} | Content: ${r.content} | Proxy: ${r.proxy} | TTL: ${r.ttl}`
+            ).join('\n');
+
+            document.getElementById('dns-output').innerHTML = `
+                <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.6;">
+                    Generated records for <strong style="color: var(--text-main);">${data.domain}</strong>.
+                    Replace <span class="dns-mono" style="color: var(--accent-blue);">${data.placeholder}</span>
+                    with your real hosting address, then add each row in
+                    <strong>Cloudflare → ${data.domain} → DNS → Records → Add record</strong>.
+                </div>
+                <div style="overflow-x: auto; border: 1px solid var(--panel-border); border-radius: 6px; padding: 4px 12px;">
+                    <table class="dns-table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Name</th>
+                                <th>Content / Target</th>
+                                <th>Proxy Status</th>
+                                <th>TTL</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>${rows}</tbody>
+                    </table>
+                </div>
+                <div style="margin-top: 16px;">
+                    <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Copy-paste preview</div>
+                    <pre class="dns-pre">${rawText}</pre>
+                </div>
+            `;
         }
 
-        async function pushDnsToCloudflare() {
-            const cf = state.cloudflare || {};
-            if (!cf.token || !cf.zoneId || !cf.target || !cf.proxyUrl) {
-                return updateCfStatus('❌ Please fill in all fields and click "Save Credentials" first.', 'var(--accent-red)');
-            }
-
-            updateCfStatus('⏳ Pushing DNS records to Cloudflare...', 'var(--accent-blue)');
-
-            try {
-                const res = await fetch(cf.proxyUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        zoneId: cf.zoneId,
-                        apiToken: cf.token,
-                        domain: cf.domain,
-                        target: cf.target
-                    })
-                });
-                const data = await res.json();
-                if (res.ok && data.success) {
-                    updateCfStatus('✅ DNS records pushed successfully! ' + (data.message || ''), 'var(--accent-green)');
-                } else {
-                    updateCfStatus('❌ Cloudflare Error: ' + (data.error || data.message || 'Unknown error'), 'var(--accent-red)');
-                }
-            } catch (err) {
-                updateCfStatus('❌ Network Error: ' + err.message + ' (Check that your Worker URL is correct and CORS is enabled)', 'var(--accent-red)');
-            }
+        function copyDnsRow(index, btn) {
+            if (!lastDnsData || !lastDnsData.records[index]) return;
+            const r = lastDnsData.records[index];
+            const text = `Type: ${r.type} | Name: ${r.name} | Content: ${r.content} | Proxy: ${r.proxy} | TTL: ${r.ttl}`;
+            clipboardCopy(text, btn);
         }
 
-        function showDnsRecords() {
-            const cf = state.cloudflare || {};
-            const domain = cf.domain || 'yourdomain.com';
-            const target = cf.target || 'YOUR-HOSTING-IP-OR-CNAME';
-
-            const isIp = /^\d{1,3}(\.\d{1,3}){3}$/.test(target);
-            const recordType = isIp ? 'A' : 'CNAME';
-
-            alert(
-                'Required DNS Records for ' + domain + ':\n\n' +
-                '── Record 1 (Root) ──\n' +
-                'Type: ' + recordType + '\n' +
-                'Name: @\n' +
-                'Content: ' + target + '\n' +
-                'Proxy status: Proxied (orange cloud)\n\n' +
-                '── Record 2 (WWW) ──\n' +
-                'Type: ' + recordType + '\n' +
-                'Name: www\n' +
-                'Content: ' + target + '\n' +
-                'Proxy status: Proxied (orange cloud)\n\n' +
-                'You can add these manually in Cloudflare, or click "Push DNS to Cloudflare" to add them automatically.'
-            );
+        function copyAllDnsRecords() {
+            if (!lastDnsData) return alert('Generate the DNS records first.');
+            const lines = lastDnsData.records.map(r =>
+                `Type: ${r.type} | Name: ${r.name} | Content: ${r.content} | Proxy: ${r.proxy} | TTL: ${r.ttl}`
+            ).join('\n');
+            clipboardCopy(`DNS records for ${lastDnsData.domain}\n\n${lines}`, null);
+            alert('All DNS records copied to clipboard!');
         }
 
-        function updateCfStatus(msg, color) {
-            const el = document.getElementById('cf-status');
-            if (el) { el.textContent = msg; el.style.color = color || 'var(--text-muted)'; }
+        function downloadDnsRecords() {
+            if (!lastDnsData) return alert('Generate the DNS records first.');
+            const lines = lastDnsData.records.map(r =>
+                `Type: ${r.type} | Name: ${r.name} | Content: ${r.content} | Proxy: ${r.proxy} | TTL: ${r.ttl}`
+            ).join('\n');
+            const content = `DNS records for ${lastDnsData.domain}\nGenerated by @OGPARKER1 Hub Center\n\n${lines}\n\nReplace "${lastDnsData.placeholder}" with your real hosting address before saving in Cloudflare.`;
+
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${lastDnsData.domain}-dns-records.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
 
-        // ============ End Cloudflare Functions ============
+        // ============ END DNS RECORD GENERATOR ============
 
         // 6. Activate Template (all active)
         function activateTemplate(tplName) {
